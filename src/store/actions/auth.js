@@ -42,7 +42,6 @@ export const auth = (email, password, isSignup) => {
       }
       axios.post(url, authData)
          .then(response => {
-            // console.log(response);
             const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
 
             // localStorage almacena informacion en el navegador para ser utilizada despues de hacer reload
@@ -77,7 +76,6 @@ export const auth = (email, password, isSignup) => {
             else if (error.includes('WEAK_PASSWORD')) {
                errorMsg = 'The password must be 6 character long at least.';
             }
-            // console.log(errorMsg);
             dispatch(authFail(errorMsg));
          })
    };
