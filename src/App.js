@@ -13,6 +13,7 @@ const App = (props) => {
 
    useEffect(() => {
       props.onTryAutoSignUp();
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    let routes = (
