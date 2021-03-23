@@ -1,5 +1,4 @@
-import { ADD_INGREDIENT, REMOVE_INGREDIENT, SET_INGREDIENTS, SET_ERROR } from './actionsTypes';
-import axios from '../../axios-orders';
+import { ADD_INGREDIENT, REMOVE_INGREDIENT, SET_INGREDIENTS, SET_ERROR, SET_INGREDIENTS_INITIATE } from './actionsTypes';
 
 export const addIngredient = (name) => {
    return {
@@ -29,13 +28,17 @@ export const setError = () => {
 };
 
 export const initIngredients = () => {
-   return dispatch => {
-      axios.get('ingredients.json')
-         .then(response => {
-            dispatch(setIngredients(response.data));
-         })
-         .catch(err => {
-            dispatch(setError());
-         });
-   };
+   // with redux-thunk
+   // return dispatch => {
+   //    axios.get('ingredients.json')
+   //       .then(response => {
+   //          dispatch(setIngredients(response.data));
+   //       })
+   //       .catch(err => {
+   //          dispatch(setError());
+   //       });
+   // };
+
+   // with redux-saga
+   return { type: SET_INGREDIENTS_INITIATE };
 };
