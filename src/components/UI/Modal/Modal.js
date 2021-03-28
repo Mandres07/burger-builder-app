@@ -1,24 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Auxiliary from '../../../hoc/Auxiliary/Auxiliary';
 import Backdrop from '../Backdrop/Backdrop';
 import classes from './Modal.module.css';
 
-class Modal extends Component {
-   shouldComponentUpdate(nextProps, nextState) {
-      return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
-   }
-
-   render() {
-      return (
-         <Auxiliary>
-            <Backdrop show={this.props.show} dismiss={this.props.modalClosed} />
-            <div className={classes.Modal} style={{ transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)', opacity: this.props.show ? '1' : '0' }}>
-               {this.props.children}
-            </div>
-         </Auxiliary>
-      );
-   }
-
+const Modal = props => {
+   return (
+      <Auxiliary>
+         <Backdrop show={props.show} dismiss={props.modalClosed} />
+         <div className={classes.Modal} style={{ transform: props.show ? 'translateY(0)' : 'translateY(-100vh)', opacity: props.show ? '1' : '0' }}>
+            {props.children}
+         </div>
+      </Auxiliary>
+   );
 }
 
-export default Modal;
+// React.memo() como segundo parametro recibe una funcion que recibe el prevProps y el nextProp y hay que verifiar si los props son iguales y retornr true or false
+export default React.memo(Modal, (prevProps, nextProps) => nextProps.show === prevProps.show && nextProps.children === prevProps.children);
